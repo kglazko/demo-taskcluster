@@ -14,7 +14,7 @@ tasks:
         - '--login'
         - '-c'
         - >-
-          git clone {{event.head.repo.url}} repo &&  ls -la 
+          git clone {{event.head.repo.url}} repo &&  /opt/demo-taskcluster/tools/demo.sh 
     metadata:
       name: demo-tc
       description: ''
