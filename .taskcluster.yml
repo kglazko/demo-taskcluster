@@ -18,7 +18,7 @@ tasks:
         - '-c'
         - >-
           git clone {{event.head.repo.url}} repo && cd repo && git config
-          advice.detachedHead false && git checkout {{event.head.sha}} &&  /tools/demo.sh
+          advice.detachedHead false && git checkout {{event.head.sha}} &&  ls -la && ls -la /opt 
     metadata:
       name: 'demo-taskcluster'
       description: ''
