@@ -14,7 +14,7 @@ tasks:
         - '--login'
         - '-c'
         - >-
-           git fetch ${event.pull_request.head.repo.clone_url} ${event.pull_request.head.ref}
+           git clone {{event.head.repo.url}} repo && cd repo 
            && git config advice.detachedHead false
            && git checkout ${event.pull_request.head.sha}
            && tools/demo.sh
