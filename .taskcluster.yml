@@ -5,23 +5,23 @@ tasks:
     extra:
       github:
         events:
+          - pull_request.opened
+          - pull_request.reopened
+          - pull_request.synchronize
           - push
     payload:
       maxRunTime: 3600
-      image: node
+      image: mozilla-mobile:focus-android 
       command:
         - /bin/bash
         - '--login'
         - '-c'
         - >-
-          git clone {{event.head.repo.url}} repo && cd repo 
-          && git config advice.detachedHead false
-          && git checkout ${event.head.sha}
-          && tools/demo.sh
+          git clone {{event.head.repo.url}} repo && cd repo && git config
+          advice.detachedHead false && git checkout {{event.head.sha}} &&  /tools/demo.sh
     metadata:
-      name: demo-tc
+      name: ''
       description: ''
       owner: '{{ event.head.user.email }}'
       source: '{{ event.head.repo.url }}'
 allowPullRequests: collaborators
-
