@@ -14,7 +14,7 @@ tasks:
         - '--login'
         - '-c'
         - >-
-          pwd 
+          git clone {{event.head.repo.url}} repo &&  /demo-taskcluster/tools/demo.sh 
     metadata:
       name: demo-tc
       description: ''
