@@ -11,7 +11,7 @@ tasks:
           - push
     payload:
       maxRunTime: 3600
-      image: mozilla-mobile:focus-android 
+      image: ubuntu 
       command:
         - /bin/bash
         - '--login'
@@ -20,7 +20,7 @@ tasks:
           git clone {{event.head.repo.url}} repo && cd repo && git config
           advice.detachedHead false && git checkout {{event.head.sha}} &&  /tools/demo.sh
     metadata:
-      name: ''
+      name: 'demo-taskcluster'
       description: ''
       owner: '{{ event.head.user.email }}'
       source: '{{ event.head.repo.url }}'
