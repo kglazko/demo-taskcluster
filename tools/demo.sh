@@ -24,7 +24,7 @@ PATH_TEST="."
 file_list=$(ls $PATH_TEST | xargs -n 1 basename)
 array=( $file_list )
 echo $array
-
+echo "Hello from  Taskcluster"
 exitcode=$?
 
 # Now exit the script with the exit code from the test run. (Only 0 if all test executions passed)

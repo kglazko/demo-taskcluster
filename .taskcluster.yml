@@ -2,6 +2,8 @@ version: 0
 tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
+    routes: 
+      - "notify:irc-channel.#android-ci.on-any" 
     extra:
       github:
         events:
