@@ -11,7 +11,7 @@ tasks:
           - push
     payload:
       maxRunTime: 3600
-      image: ubuntu 
+      image: node 
       command:
         - /bin/bash
         - '--login'
