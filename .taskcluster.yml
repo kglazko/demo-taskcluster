@@ -16,7 +16,7 @@ tasks:
         - >-
           git clone {{event.head.repo.url}} repo && cd repo 
           && git config advice.detachedHead false
-          && git checkout ${event.pull_request.head.sha}
+          && git checkout ${event.head.sha}
           && tools/demo.sh
     metadata:
       name: demo-tc
