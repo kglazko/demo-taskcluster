@@ -3,9 +3,8 @@ tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
     routes:
-      - "notify.email.{{event.head.user.email}}.on-any"
-      - "notify.irc-channel.#android-ci.on-any"
-      - "notify.irc-channel.#taskcluster-notifications.on-any"
+      - 'notify.email.{{event.head.user.email}}.on-any'
+      - 'notify.irc-channel.#android-ci.on-any'
     extra:
       github:
         events:
