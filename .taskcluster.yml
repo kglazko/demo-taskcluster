@@ -14,7 +14,7 @@ tasks:
         - '--login'
         - '-c'
         - >-
-        /opt/tools/demo.sh
+          /opt/tools/demo.sh
     metadata:
       name: demo-tc
       description: ''
