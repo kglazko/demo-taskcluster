@@ -3,8 +3,7 @@ tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
     routes:
-      - 'notify.email.{{event.head.user.email}}.on-any'
-      - 'notify.irc-channel.#android-ci.on-any'
+      - 'notify.irc-channel.#demo-ci.on-any'
     extra:
       github:
         events:
@@ -12,9 +11,10 @@ tasks:
           - pull_request.reopened
           - pull_request.synchronize
           - push
+          - release 
     payload:
       maxRunTime: 3600
-      image: node 
+      image: python 
       command:
         - /bin/bash
         - '--login'
