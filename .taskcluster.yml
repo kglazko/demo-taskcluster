@@ -27,7 +27,4 @@ tasks:
       description: ''
       owner: '{{ event.head.user.email }}'
       source: '{{ event.head.repo.url }}'
-    scopes:
-      - "queue:route:notify.irc-channel.#demo-ci.on-any",
-      - "queue:route:statuses",
 allowPullRequests: collaborators
