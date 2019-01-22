@@ -107,7 +107,7 @@ def generate_task(name, description, command, dependencies = [], artifacts = {},
 		"metadata": {
 			"name": name,
 			"description": description,
-			"owner": GITHUB_OWNER_EMAIL,
+			"owner": "kglazko@mozilla.com",
 			"source": SOURCE
 		}
 	}
