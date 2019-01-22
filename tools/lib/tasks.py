@@ -149,4 +149,4 @@ def schedule_task(queue, taskId, task):
 
     result = queue.createTask(taskId, task)
     print("RESULT", taskId)
-print(json.dumps(result))
+#print(json.dumps(result))
