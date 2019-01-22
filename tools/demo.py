@@ -24,6 +24,11 @@ GITHUB_REPO = 'demo-taskcluster'
 GITHUB_OWNER = 'kglazko'
 GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
 SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
+payload_source = {
+	"body": "Posting a comment from TASKCLUSTER"
+	}
+payload = json.dumps(payload_source)
+
 
 
 def post_github_comment(issue_number, payload):
