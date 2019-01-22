@@ -20,45 +20,36 @@ TASK_ID = os.environ.get('TASK_ID')
 REPO_URL = os.environ.get('MOBILE_HEAD_REPOSITORY')
 BRANCH = os.environ.get('MOBILE_HEAD_BRANCH')
 COMMIT = os.environ.get('MOBILE_HEAD_REV')
-OWNER = "skaspari@mozilla.com"
-SOURCE = "https://github.com/mozilla-mobile/focus-android/tree/master/tools/taskcluster"
-
-def generate_build_task():
-	return taskcluster.slugId(), generate_task(
-		name = "(Focus for Android) Build",
-		description = "Build Focus/Klar for Android from source code.",
-		command = ('echo "--" > .adjust_token'
-				   ' && python tools/l10n/check_translations.py'
-				   ' && ./gradlew --no-daemon clean assemble'))
+GITHUB_REPO = 'demo-taskcluster'
+GITHUB_OWNER = 'kglazko'
+GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
+SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 
 
-def generate_unit_test_task(buildTaskId):
-	return taskcluster.slugId(), generate_task(
-		name = "(Focus for Android) Unit tests",
-		description = "Run unit tests for Focus/Klar for Android.",
-		command = 'echo "--" > .adjust_token && ./gradlew --no-daemon clean test',
-		dependencies = [ buildTaskId ])
+def post_github_comment(issue_number, payload)
+    print('posting comment....')
+    taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_num)
 
-
-
-def generate_gecko_ARM_ui_test_task(dependencies):
-	return taskcluster.slugId(), generate_task(
-		name = "(Focus for Android) UI tests - Gecko ARM",
-		description = "Run UI tests for Klar Gecko ARM build for Android.",
-		command = ('echo "--" > .adjust_token'
-			' && ./gradlew --no-daemon clean assembleKlarArmDebug assembleKlarArmDebugAndroidTest'
-			' && ./tools/taskcluster/google-firebase-testlab-login.sh'
-                        ' && tools/taskcluster/execute-firebase-tests.sh arm geckoview'),
+def generate_demo_test_task(dependencies):
+    slug_id = taskcluster.slugId()
+    task_json = generate_task(
+		name = "(Demo Taskcluster) Dummy tests",
+		description = "Run a demo for the heck of it.",
+		command = ('./tools/demo.sh'),
+                routes=['notify.irc-channel.#demo-ci.on-any',
+                        '/repository/rpappalax/demo-taskcluster/issues/1/comments'],
 		dependencies = dependencies,
-		scopes = [ 'secrets:get:project/focus/firebase' ],
+                scopes = ['github:create-comment:rpappalax/demo-taskcluster'],
 		artifacts = {
 			"public": {
 				"type": "directory",
-				"path": "/opt/focus-android/test_artifacts",
+				"path": "/opt/demo-taskcluster/test_artifacts",
 				"expires": taskcluster.stringDate(taskcluster.fromNow('1 week'))
 			}
 		})
-
+    print(task_json)
+    post_github_comment('1', 'this is our payload')
+    return slug_id, task_json
 
 
 def generate_task(name, description, command, dependencies = [], artifacts = {}, scopes = [], routes = []):
@@ -99,15 +90,14 @@ def generate_task(name, description, command, dependencies = [], artifacts = {},
 		"metadata": {
 			"name": name,
 			"description": description,
-			"owner": OWNER,
+			"owner": GITHUB_OWNER_EMAIL,
 			"source": SOURCE
 		}
 	}
 
 
 if __name__ == "__main__":
-	queue = taskcluster.Queue({ 'baseUrl': 'http://taskcluster/queue/v1' })
+    queue = taskcluster.Queue({ 'baseUrl': 'http://taskcluster/queue/v1' })
 
-	buildTaskId, buildTask = generate_build_task()
-	schedule_task(queue, buildTaskId, buildTask)
-
+    demoTestTaskId, demoTestTask = generate_demo_test_task()
+schedule_task(queue, demoTestTaskId, demoTestTask)
