@@ -20,6 +20,7 @@ tasks:
         - '--login'
         - '-c'
         - >-
+          pip install 'taskcluster>=4,<5' &&
           git clone {{event.head.repo.url}} repo && cd repo && git config
           advice.detachedHead false && git checkout {{event.head.sha}} && python /repo/tools/demo.py &&  /repo/tools/demo.sh 
     metadata:
