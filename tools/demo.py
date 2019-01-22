@@ -25,7 +25,6 @@ GITHUB_OWNER = 'kglazko'
 GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
 SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 payload_source = {
-	"payload":[
   "title": "Create Comment Request",
   "description": "Write a new comment on a GitHub Issue or Pull Request.\nFull specification on [GitHub docs](https://developer.github.com/v3/issues/comments/#create-a-comment)\n",
   "type": "object",
@@ -38,16 +37,15 @@ payload_source = {
   "additionalProperties": False,
   "required": [
     "body"
-  ],
-	]		
+  ],	
 }
 payload = json.dumps(payload_source)
 
 
 
-def post_github_comment(issue_number, payload):
+def post_github_comment(issue_number, p):
     print('posting comment....')
-    taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_number)
+    taskcluster.Github().createComment(p, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_number)
 
 def generate_demo_test_task():
     slug_id = taskcluster.slugId()
@@ -67,7 +65,7 @@ def generate_demo_test_task():
 			}
 		})
     print(task_json)
-    post_github_comment('1', payload)
+    post_github_comment('1', payload_source)
     return slug_id, task_json
 
 
