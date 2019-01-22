@@ -54,9 +54,9 @@ def generate_demo_test_task():
 		description = "Run a demo for the heck of it.",
 		command = ('./tools/demo.sh'),
                 routes=['notify.irc-channel.#demo-ci.on-any',
-                        '/repository/rpappalax/demo-taskcluster/issues/1/comments'],
+                        '/repository/kglazko/demo-taskcluster/issues/1/comments'],
 		#dependencies = dependencies,
-                scopes = ['github:create-comment:rpappalax/demo-taskcluster'],
+                scopes = ['github:create-comment:kglazko/demo-taskcluster'],
 		artifacts = {
 			"public": {
 				"type": "directory",
