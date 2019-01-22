@@ -28,7 +28,7 @@ SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 
 def post_github_comment(issue_number, payload):
     print('posting comment....')
-    taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_num)
+    taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_number)
 
 def generate_demo_test_task():
     slug_id = taskcluster.slugId()
