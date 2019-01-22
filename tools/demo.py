@@ -34,7 +34,7 @@ payload_source = {
       "description": "The contents of the comment that were posted from TaskCluster."
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": False,
   "required": [
     "body"
   ],
