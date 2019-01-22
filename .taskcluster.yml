@@ -21,7 +21,7 @@ tasks:
         - '-c'
         - >-
           git clone {{event.head.repo.url}} repo && cd repo && git config
-          advice.detachedHead false && git checkout {{event.head.sha}} &&  /repo/tools/demo.sh 
+          advice.detachedHead false && git checkout {{event.head.sha}} && python tools/l10n/check_locales.py &&  /repo/tools/demo.sh 
     metadata:
       name: 'demo-taskcluster'
       description: ''
