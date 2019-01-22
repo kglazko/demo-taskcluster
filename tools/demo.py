@@ -25,6 +25,7 @@ GITHUB_OWNER = 'kglazko'
 GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
 SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 payload_source = {
+	"payload":[
   "title": "Create Comment Request",
   "description": "Write a new comment on a GitHub Issue or Pull Request.\nFull specification on [GitHub docs](https://developer.github.com/v3/issues/comments/#create-a-comment)\n",
   "type": "object",
@@ -38,6 +39,7 @@ payload_source = {
   "required": [
     "body"
   ],
+	]		
 }
 payload = json.dumps(payload_source)
 
