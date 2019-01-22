@@ -26,7 +26,7 @@ GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
 SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 
 
-def post_github_comment(issue_number, payload)
+def post_github_comment(issue_number, payload):
     print('posting comment....')
     taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_num)
 
