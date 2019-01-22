@@ -31,7 +31,7 @@ payload_source = {
   "properties": {
     "body": {
       "type": "string",
-      "description": “POSTING FROM TASKCLUSTER.”
+      "description": "The contents of the comment that were posted from TaskCluster.”
     }
   },
   "additionalProperties": false,
