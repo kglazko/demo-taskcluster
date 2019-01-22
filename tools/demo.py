@@ -30,7 +30,7 @@ def post_github_comment(issue_number, payload):
     print('posting comment....')
     taskcluster.Github().createComment(payload, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_num)
 
-def generate_demo_test_task(dependencies):
+def generate_demo_test_task():
     slug_id = taskcluster.slugId()
     task_json = generate_task(
 		name = "(Demo Taskcluster) Dummy tests",
@@ -38,7 +38,7 @@ def generate_demo_test_task(dependencies):
 		command = ('./tools/demo.sh'),
                 routes=['notify.irc-channel.#demo-ci.on-any',
                         '/repository/rpappalax/demo-taskcluster/issues/1/comments'],
-		dependencies = dependencies,
+		#dependencies = dependencies,
                 scopes = ['github:create-comment:rpappalax/demo-taskcluster'],
 		artifacts = {
 			"public": {
@@ -98,7 +98,5 @@ def generate_task(name, description, command, dependencies = [], artifacts = {},
 
 if __name__ == "__main__":
 	queue = taskcluster.Queue({ 'baseUrl': 'http://taskcluster/queue/v1' })
-	buildTaskId, buildTask = generate_build_task()
-	schedule_task(queue, buildTaskId, buildTask)
-	demoTestTaskId, demoTestTask = generate_demo_test_task(buildTaskId)
+	demoTestTaskId, demoTestTask = generate_demo_test_task()
 	schedule_task(queue, demoTestTaskId, demoTestTask)
