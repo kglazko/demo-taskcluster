@@ -53,7 +53,7 @@ def generate_demo_test_task():
 			}
 		})
     print(task_json)
-    post_github_comment('1', 'this is our payload')
+    post_github_comment('1', payload)
     return slug_id, task_json
 
 
