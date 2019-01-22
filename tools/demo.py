@@ -97,7 +97,8 @@ def generate_task(name, description, command, dependencies = [], artifacts = {},
 
 
 if __name__ == "__main__":
-    queue = taskcluster.Queue({ 'baseUrl': 'http://taskcluster/queue/v1' })
-
-    demoTestTaskId, demoTestTask = generate_demo_test_task()
-schedule_task(queue, demoTestTaskId, demoTestTask)
+	queue = taskcluster.Queue({ 'baseUrl': 'http://taskcluster/queue/v1' })
+	buildTaskId, buildTask = generate_build_task()
+	schedule_task(queue, buildTaskId, buildTask)
+	demoTestTaskId, demoTestTask = generate_demo_test_task(buildTaskId)
+	schedule_task(queue, demoTestTaskId, demoTestTask)
