@@ -144,9 +144,9 @@ class TaskBuilder(object):
         }
 
 def schedule_task(queue, taskId, task):
-    print "TASK", taskId
-    print json.dumps(task, indent=4, separators=(',', ': '))
+    print("TASK", taskId)
+    print(json.dumps(task, indent=4, separators=(',', ': ')))
 
     result = queue.createTask(taskId, task)
-    print "RESULT", taskId
-print json.dumps(result)
+    print("RESULT", taskId)
+print(json.dumps(result))
