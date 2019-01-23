@@ -4,7 +4,6 @@ tasks:
     workerType: '{{ taskcluster.docker.workerType }}'    
     routes:
       - 'notify.irc-channel.#demo-ci.on-any'
-      - 'github:create-comment:kglazko/*'
     extra:
       github:
         events:
