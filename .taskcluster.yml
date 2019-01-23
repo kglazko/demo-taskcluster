@@ -1,10 +1,4 @@
 version: 0
-allowPullRequests: public
-metadata:
-  name: demo-taskcluster
-  description: "Demo"
-  owner: "{{ event.head.user.email }}"
-  source: "{{ event.head.repo.url }}"
 tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
