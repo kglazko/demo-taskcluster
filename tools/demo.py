@@ -22,7 +22,7 @@ BRANCH = os.environ.get('MOBILE_HEAD_BRANCH')
 COMMIT = os.environ.get('MOBILE_HEAD_REV')
 GITHUB_REPO = 'demo-taskcluster'
 GITHUB_OWNER = 'kglazko'
-GITHUB_OWNER_EMAIL = "katglazko@gmail.com"
+GITHUB_OWNER_EMAIL = "kglazko@mozilla.com"
 SOURCE = "https://github.com/kglazko/demo-taskcluster/tree/master/tools"
 payload_source = {
   "title": "Create Comment Request",
