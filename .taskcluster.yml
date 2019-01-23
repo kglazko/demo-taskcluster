@@ -3,7 +3,7 @@ tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'    
     routes:
-      - 'notify.irc-channel.#demo-ci.on-any',
+      - 'notify.irc-channel.#demo-ci.on-any'
       - '/repository/kglazko/demo-taskcluster/issues/1/comments'
     extra:
       github:
