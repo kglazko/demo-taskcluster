@@ -3,12 +3,9 @@ tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
     scopes:
-      - "queue:route.index.project.demo-taskcluster.*"
       - "github:create-comment:kglazko/demo-taskcluster"    
     routes:
       - 'notify.irc-channel.#demo-ci.on-any'
-      - "index.project.demo-taskcluster.branches{{ event.head.repo.branch }}.*"
-      - "index.project.demo-taskcluster.revisions.{{ event.head.sha }}.* }}.*"
 
     extra:
       github:
