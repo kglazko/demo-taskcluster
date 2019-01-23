@@ -1,9 +1,22 @@
 version: 0
+allowPullRequests: public
+metadata:
+  name: demo-taskcluster
+  description: "Demo"
+  owner: "{{ event.head.user.email }}"
+  source: "{{ event.head.repo.url }}"
 tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
-    workerType: '{{ taskcluster.docker.workerType }}'    
+    workerType: '{{ taskcluster.docker.workerType }}'
+    scopes:
+      - "queue"route.index.project.demo-taskcluster.*"
+      - "queue:create-task:aws-provisioner-v1/github-worker"
+      - "github:create-comment:kglazko/demo-taskcluster"    
     routes:
       - 'notify.irc-channel.#demo-ci.on-any'
+      - "index.project.demo-taskcluster.branches{{ event.head.repo.branch }}.*"
+      - "index.project.demo-taskcluster.revisions.{{ event.head.sha }}.* }}.*"
+
     extra:
       github:
         events:
@@ -13,6 +26,11 @@ tasks:
           - push
           - release 
     payload:
+      env:
+        GITHUB_HEAD_USER_EMAIL: "{{ event.head.user.email }}"
+        GITHUB_HEAD_REPO_URL: "{{ event.head.repo.url }}"
+        GITHUB_HEAD_REPO_SHA: "{{ event.head.sha }}"
+        GITHUB_HEAD_REPO_BRANCH: "{{ event.head.repo.branch }}"
       maxRunTime: 3600
       image: python 
       command:
@@ -22,10 +40,4 @@ tasks:
         - >-
           pip install 'taskcluster>=4,<5' &&
           git clone {{event.head.repo.url}} repo && cd repo && git config
-          advice.detachedHead false && git checkout {{event.head.sha}} && python /repo/tools/demo.py &&  /repo/tools/demo.sh 
-    metadata:
-      name: 'demo-taskcluster'
-      description: ''
-      owner: '{{ event.head.user.email }}'
-      source: '{{ event.head.repo.url }}'
-allowPullRequests: collaborators
+          advice.detachedHead false && git checkout {{event.head.sha}} && python /repo/tools/demo.py &&  /repo/tools/demo.sh
