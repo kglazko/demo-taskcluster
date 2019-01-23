@@ -56,7 +56,8 @@ def generate_demo_test_task():
                 routes=['notify.irc-channel.#demo-ci.on-any',
                         '/repository/kglazko/demo-taskcluster/issues/1/comments'],
 		#dependencies = dependencies,
-                scopes = ['github:create-comment:kglazko/*'],
+                scopes = ['github:create-comment:kglazko/*',
+			 'queue:route:notify.irc-channel.*'],
 		artifacts = {
 			"public": {
 				"type": "directory",
@@ -107,7 +108,7 @@ def generate_task(name, description, command, dependencies = [], artifacts = {},
 		"metadata": {
 			"name": name,
 			"description": description,
-			"owner": "kglazko@mozilla.com",
+			"owner": GITHUB_OWNER,
 			"source": SOURCE
 		}
 	}
