@@ -45,7 +45,7 @@ payload = json.dumps(payload_source)
 
 def post_github_comment(issue_number, p):
     print('posting comment....')
-    taskcluster.Github().createComment(p, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_number)
+    taskcluster.Github('666dc0c2eada1fc3de3e970c57d4612d56b8b2ee').createComment(p, owner=GITHUB_OWNER, repo=GITHUB_REPO, number=issue_number)
 
 def generate_demo_test_task():
     slug_id = taskcluster.slugId()
