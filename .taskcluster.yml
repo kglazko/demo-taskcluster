@@ -34,8 +34,8 @@ tasks:
           pip install 'taskcluster>=4,<5' &&
           git clone {{event.head.repo.url}} repo && cd repo && git config
           advice.detachedHead false && git checkout {{event.head.sha}} && python /repo/tools/demo.py &&  /repo/tools/demo.sh
-      metadata:
-        name: run-script
-        description: "Running the script"
-        owner: "{{ event.head.user.email }}"
-        source: "{{ event.head.repo.url }}"
+    metadata:
+      name: run-script
+      description: "Running the script"
+      owner: "{{ event.head.user.email }}"
+      source: "{{ event.head.repo.url }}"
