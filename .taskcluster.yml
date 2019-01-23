@@ -9,7 +9,7 @@ tasks:
   - provisionerId: '{{ taskcluster.docker.provisionerId }}'
     workerType: '{{ taskcluster.docker.workerType }}'
     scopes:
-      - "queue"route.index.project.demo-taskcluster.*"
+      - "queue:route.index.project.demo-taskcluster.*"
       - "queue:create-task:aws-provisioner-v1/github-worker"
       - "github:create-comment:kglazko/demo-taskcluster"    
     routes:
