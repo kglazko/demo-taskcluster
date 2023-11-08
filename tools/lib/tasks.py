@@ -18,7 +18,11 @@ class TaskBuilder(object):
         self.source = source
         self.scheduler_id = scheduler_id
 
-    def build_task(self, name, description, command, dependencies = [], artifacts = {}, scopes = [], features = {}, worker_type = 'github-worker'):
+    def build_task(self, name, description, command, dependencies = None, artifacts = None, scopes = None, features = None, worker_type = 'github-worker'):
+        dependencies = [] if dependencies is None else dependencies
+        artifacts = {} if artifacts is None else artifacts
+        scopes = [] if scopes is None else scopes
+        features = {} if features is None else features
         created = datetime.datetime.now()
         expires = taskcluster.fromNow('1 year')
         deadline = taskcluster.fromNow('1 day')
@@ -65,7 +69,10 @@ class TaskBuilder(object):
         }
 
 
-    def craft_signing_task(self, build_task_id, name, description, signing_format, is_staging, apks=[], scopes=[], routes=[]):
+    def craft_signing_task(self, build_task_id, name, description, signing_format, is_staging, apks=None, scopes=None, routes=None):
+        apks = [] if apks is None else apks
+        scopes = [] if scopes is None else scopes
+        routes = [] if routes is None else routes
         created = datetime.datetime.now()
         expires = taskcluster.fromNow('1 year')
         deadline = taskcluster.fromNow('1 day')
@@ -104,7 +111,9 @@ class TaskBuilder(object):
             }
         }
 
-    def craft_push_task(self, signing_task_id, name, description, is_staging, apks=[], scopes=[], track='internal', commit=False):
+    def craft_push_task(self, signing_task_id, name, description, is_staging, apks=None, scopes=None, track='internal', commit=False):
+        apks = [] if apks is None else apks
+        scopes = [] if scopes is None else scopes
         created = datetime.datetime.now()
         expires = taskcluster.fromNow('1 year')
         deadline = taskcluster.fromNow('1 day')
