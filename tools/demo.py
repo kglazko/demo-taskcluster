@@ -70,7 +70,11 @@ def generate_demo_test_task():
     return slug_id, task_json
 
 
-def generate_task(name, description, command, dependencies = [], artifacts = {}, scopes = [], routes = []):
+def generate_task(name, description, command, dependencies = None, artifacts = None, scopes = None, routes = None):
+	dependencies = [] if dependencies is None else dependencies
+	artifacts = {} if artifacts is None else artifacts
+	scopes = [] if scopes is None else scopes
+	routes = [] if routes is None else routes
 	created = datetime.datetime.now()
 	expires = taskcluster.fromNow('1 month')
 	deadline = taskcluster.fromNow('1 day')
